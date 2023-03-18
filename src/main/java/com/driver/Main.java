@@ -26,7 +26,8 @@ public class Main {
         System.out.println("There are " + gmail.getTrashSize() + " mails in the trash.");
         gmail.emptyTrash();
         System.out.println("There are " + gmail.getTrashSize() + " mails in the trash.");
-
+        System.out.println(gmail.findOldestMessage());
+        System.out.println(gmail.findLatestMessage());
         Workspace workspace = new Workspace("accio@gmail.com");
         System.out.println("Inbox capacity is " + workspace.getInboxCapacity() + " in workspace.");
 

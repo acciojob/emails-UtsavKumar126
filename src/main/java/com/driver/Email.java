@@ -35,10 +35,8 @@ public class Email {
         }
 
     }
-
-    Map<Character,Integer>digitMap=new HashMap<>();
-
     private boolean isUppercase(String newPassword) {
+        Map<Character,Integer>digitMap=new HashMap<>();
         for(int i=0;i<newPassword.length();i++){
             digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
         }
@@ -51,6 +49,7 @@ public class Email {
     }
 
     private boolean isLowercase(String newPassword) {
+        Map<Character,Integer>digitMap=new HashMap<>();
         for(int i=0;i<newPassword.length();i++){
             digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
         }
@@ -63,6 +62,7 @@ public class Email {
     }
 
     private boolean hasSpecial(String newPassword) {
+        Map<Character,Integer>digitMap=new HashMap<>();
         for(int i=0;i<newPassword.length();i++){
             digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
         }
@@ -75,6 +75,7 @@ public class Email {
     }
 
     private boolean hasDigit(String newPassword) {
+        Map<Character,Integer>digitMap=new HashMap<>();
         for(int i=0;i<newPassword.length();i++){
             digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
         }

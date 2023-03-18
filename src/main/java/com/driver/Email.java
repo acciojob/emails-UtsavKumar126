@@ -67,7 +67,7 @@ public class Email {
             digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
         }
         for(Character c : digitMap.keySet()){
-            if(c.equals('@')||c.equals('#')||c.equals('$')||c.equals("%")||c.equals('&')||c.equals('*')||c.equals('?')||c.equals('+')){
+            if(((int)c >= 32 && (int)c <= 47)||((int)c >= 58 && (int)c <= 64)||((int)c >= 91 && (int)c <= 96)||((int)c >= 123 && (int)c <= 126)){
                 return true;
             }
         }

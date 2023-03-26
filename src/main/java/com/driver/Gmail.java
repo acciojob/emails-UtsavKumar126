@@ -18,17 +18,18 @@ public class Gmail extends Email {
 
     public void receiveMail(Date date, String sender, String message){
         // If the inbox is full, move the oldest mail in the inbox to trash and add the new mail to inbox.
-        if(inbox.size()==inboxCapacity){
-            Mail mail=inbox.get(0);
-            trash.add(mail);
-            inbox.remove(mail);
+        if(!sender.equals(super.getEmailId())) {
+            if (inbox.size() == inboxCapacity) {
+                Mail mail = inbox.get(0);
+                trash.add(mail);
+                inbox.remove(mail);
+            }
+            // It is guaranteed that:
+            // 1. Each mail in the inbox is distinct.
+            // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
+            Mail mail = new Mail(date, sender, message);
+            inbox.add(mail);
         }
-        // It is guaranteed that:
-        // 1. Each mail in the inbox is distinct.
-        // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
-        Mail mail=new Mail(date,sender,message);
-        inbox.add(mail);
-
     }
 
     public void deleteMail(String message){
@@ -89,11 +90,10 @@ public class Gmail extends Email {
     public void emptyTrash(){
         // clear all mails in the trash
         trash.clear();
-
     }
 
     public int getInboxCapacity() {
         // Return the maximum number of mails that can be stored in the inbox
-        return inboxCapacity;
+        return inboxCapacity-inbox.size();
     }
 }

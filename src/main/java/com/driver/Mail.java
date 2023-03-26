@@ -14,6 +14,9 @@ public class Mail {
         this.message = message;
     }
 
+    public Mail() {
+    }
+
     public Date getDate() {
         return date;
     }

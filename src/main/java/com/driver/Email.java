@@ -1,14 +1,11 @@
 package com.driver;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Email {
 
     private String emailId;
     private String password;
 
-    public Email(String emailId) {
+    public Email(String emailId){
         this.emailId = emailId;
         this.password = "Accio@123";
     }
@@ -21,68 +18,55 @@ public class Email {
         return password;
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
+    public void changePassword(String oldPassword, String newPassword){
         //Change password only if the oldPassword is equal to current password and the new password meets all of the following:
-        if (oldPassword == this.password) {
-            // 1. It contains at least 8 characters
-            if (newPassword.length() >= 8 && isUppercase(newPassword) && isLowercase(newPassword) && hasSpecial(newPassword) && hasDigit(newPassword)) {
+        // 1. It contains at least 8 characters
+        // 2. It contains at least one uppercase letter
+        // 3. It contains at least one lowercase letter
+        // 4. It contains at least one digit
+        // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
+
+        if(oldPassword.equals(password)){
+            if(isValid(newPassword)){
+                System.out.println("Password changed successfully!");
                 this.password = newPassword;
             }
-            // 2. It contains at least one uppercase letter
-            // 3. It contains at least one lowercase letter
-            // 4. It contains at least one digit
-            // 5. It contains at least one special character. Any character apart from alphabets and digits is a special character
-        }
-
-    }
-    private boolean isUppercase(String newPassword) {
-        Map<Character,Integer>digitMap=new HashMap<>();
-        for(int i=0;i<newPassword.length();i++){
-            digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
-        }
-        for (Character c:digitMap.keySet()) {
-            if ((int)c >= 65 && (int)c <= 90) {
-                return true;
+            else{
+                System.out.println("The new password is not valid!");
             }
         }
-        return false;
+        else{
+            System.out.println("The given password does not match current password!");
+        }
     }
 
-    private boolean isLowercase(String newPassword) {
-        Map<Character,Integer>digitMap=new HashMap<>();
-        for(int i=0;i<newPassword.length();i++){
-            digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
-        }
-        for (Character c:digitMap.keySet()) {
-            if ((int)c >= 97 && (int)c <= 122) {
-                return true;
-            }
-        }
-        return false;
-    }
+    private boolean isValid(String password){
+        boolean cLetter = false;
+        boolean sLetter = false;
+        boolean no = false;
+        boolean specialCharacter = false;
 
-    private boolean hasSpecial(String newPassword) {
-        Map<Character,Integer>digitMap=new HashMap<>();
-        for(int i=0;i<newPassword.length();i++){
-            digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
+        if(password.length() < 8){
+            return false;
         }
-        for(Character c : digitMap.keySet()){
-            if(((int)c >= 32 && (int)c <= 47)||((int)c >= 58 && (int)c <= 64)||((int)c >= 91 && (int)c <= 96)||((int)c >= 123 && (int)c <= 126)){
-                return true;
-            }
-        }
-        return false;
-    }
+        for(int i=0; i<password.length(); i++){
+            char ch = password.charAt(i);
 
-    private boolean hasDigit(String newPassword) {
-        Map<Character,Integer>digitMap=new HashMap<>();
-        for(int i=0;i<newPassword.length();i++){
-            digitMap.put(newPassword.charAt(i), digitMap.getOrDefault(newPassword.charAt(i),0)+1);
-        }
-        for (Character c:digitMap.keySet()) {
-            if ((int)c >= 48 && (int)c <= 57) {
-                return true;
+            if(ch >= 'A' && ch <= 'Z'){
+                cLetter = true;
             }
+            else if(ch >= 'a' && ch <= 'z'){
+                sLetter = true;
+            }
+            else if(ch >= '0' && ch <= '9'){
+                no = true;
+            }
+            else{
+                specialCharacter = true;
+            }
+        }
+        if(cLetter && sLetter && no && specialCharacter){
+            return true;
         }
         return false;
     }
